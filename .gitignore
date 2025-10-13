@@ -1,0 +1,82 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IDEs and editors
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/  # Optional: remove this line if you want to include VSCode settings
+
+# Flutter/Dart/Pub related
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+.melos_tool/
+build/
+coverage/
+generated_plugin_registrant.dart
+**/doc/api/
+**/ios/Flutter/.last_build_id
+
+# Android
+android/.gradle/
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/local.properties
+android/key.properties
+*.jks
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Runner.xcworkspace
+ios/build/
+ios/GoogleService-Info.plist  # Firebase config (do not share this)
+
+# Web
+web/.dart_tool/
+web/build/
+
+# Windows
+windows/build/
+windows/.dart_tool/
+
+# Linux
+linux/build/
+linux/.dart_tool/
+
+# macOS
+macos/build/
+macos/.dart_tool/
+
+# Fuchsia
+.fuchsia/
+
+# Firebase (Android)
+android/app/google-services.json  # Firebase config (do not share this)
+
+# Symbolication
+app.*.symbols
+
+# Obfuscation
+app.*.map.json
