@@ -3,8 +3,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sraven/dash_board_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -125,7 +125,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   _farmKey.currentState!.validate();
                   nameTextEditingController.text ="sraven";
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> DashBoardScreen()));
                 },
+                
                 child: Text("Register"),
               ),
               SizedBox(height: 10),
