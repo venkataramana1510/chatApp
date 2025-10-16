@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,7 +14,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 XFile? pickedxFile;
-
+var _farmKey = GlobalKey<FormState>();
+   TextEditingController nameTextEditingController =TextEditingController();
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
@@ -21,76 +23,118 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         title: Text("Login Screen", style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        backgroundColor: Colors.green,
+        backgroundColor: const Color.fromRGBO(76, 175, 80, 1),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 40),
-            Center(
-              child: Stack(
-                children: [
-                  pickedxFile != null
-                      ? CircleAvatar(
-                          radius: 50,
-                          backgroundImage: FileImage(File(pickedxFile!.path)),
-                          
-                        )
-                      : CircleAvatar(radius: 50),
+        child: Form(
+          key: _farmKey,
+          child: Column(
+            children: [
+              SizedBox(height: 40),
+              Center(
+                child: Stack(
+                  children: [
+                    pickedxFile != null
+                        ? CircleAvatar(
+                            radius: 50,
+                            backgroundImage: FileImage(File(pickedxFile!.path)),
+                          )
+                        : CircleAvatar(radius: 50),
 
-                  Positioned(
-                    bottom: 0,
-                    right: 10,
-                    child: GestureDetector(
-                      onTap: () async {
-                        ImagePicker myImage = ImagePicker();
-                        pickedxFile = await myImage.pickImage(
-                          source: ImageSource.gallery,
-                        );
-                        if (pickedxFile != null) {
-                          print("picked:${pickedxFile!.path}");
-                          setState(() {});
-                        } else {
-                          print("not picked");
+                    Positioned(
+                      bottom: 0,
+                      right: 10,
+                      child: GestureDetector(
+                        onTap: () async {
+                          ImagePicker myImage = ImagePicker();
+                          pickedxFile = await myImage.pickImage(
+                            source: ImageSource.gallery,
+                          );
+                          if (pickedxFile != null) {
+                            print("picked:${pickedxFile!.path}");
+                            setState(() {});
+                          } else {
+                            print("not picked");
+                          }
+                        },
+                        child: Icon(Icons.camera_alt, size: 20),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 40),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 70),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter the name";
                         }
+                        return null;
                       },
-                      child: Icon(Icons.camera_alt, size: 20),
+                      controller: nameTextEditingController,
+                      onChanged: (value) {
+                     
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Enter Your name",
+                        prefixIcon: Icon(Icons.person),
+                        label: Text("Name"),
+                        border: OutlineInputBorder(),
+                      ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 10),
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter the Email";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Enter Your Email",
+                        prefixIcon: Icon(Icons.mail),
+                        label: Text("Email"),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter the Password";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.password),
+                        hintText: "Enter Your Password",
+                        label: Text("Password"),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 40),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 70),
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Enter Your Email",
-                      label: Text("Email"),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Enter Your Password",
-                      label: Text("Password"),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ],
+              SizedBox(height: 40),
+              ElevatedButton(
+                onPressed: () {
+                  _farmKey.currentState!.validate();
+                  nameTextEditingController.text ="sraven";
+                },
+                child: Text("Register"),
               ),
-            ),
-            SizedBox(height: 40),
-            ElevatedButton(onPressed: () {}, child: Text("Register")),
-            SizedBox(height: 10),
-            TextButton(
-              onPressed: () {},
-              child: Text("Alredy have an account ?"),
-            ),
-          ],
+              SizedBox(height: 10),
+              TextButton(
+                onPressed: () {},
+                child: Text("Alredy have an account ?"),
+              ),
+            ],
+          ),
         ),
       ),
     );
